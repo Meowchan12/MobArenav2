@@ -1,0 +1,257 @@
+# ========================================================================
+# MOB ARENA V2 - DEFAULT ARENA CONFIGURATION
+# ------------------------------------------------------------------------
+# This is the master template file. You can duplicate this file to create
+# new arenas (e.g., map1.yml, map2.yml).
+#
+# IMPORTANT: Use standard YAML formatting (2 spaces per indentation).
+# ========================================================================
+
+# ==========================================
+# AREA 1: GENERAL SETTINGS
+# ==========================================
+name: "default"
+settings:
+  enabled: true
+
+  # [MỚI] ARENA LOCK: Require players to clear another arena first.
+  # Leave blank ("") if this arena is unlocked by default.
+  required-arena: ""
+
+  player-limits:
+    min-players: 1
+    max-players: 4
+
+  # The final wave of the normal game. Once completed, the Voting Phase
+  # for Endless Mode will begin.
+  max-waves: 20
+
+  # Economy integration (Requires Vault)
+  entry-fee:
+    enabled: false
+    type: VAULT
+    amount: 100.0
+
+  rules:
+    mob-drop: false
+    player-pvp: false
+    block-break: false
+    block-place: false
+    item-drop: true
+    allow-commands: false
+    command-whitelist:
+      - "/ma leave"
+      - "/ma class"
+
+  wave-conditions:
+    # If true, the next wave will NOT start until all mobs are killed.
+    clear-mob-before-next-wave: true
+    clear-boss-before-next-wave: true
+    # Delay (in seconds) before the next wave spawns.
+    next-wave: 6.0
+
+  # ----------------------------------------
+  # CONFIGURABLE ANNOUNCER
+  # ----------------------------------------
+  # Placeholders available:
+  # %arena%       : Arena Name
+  # %wave%        : Current Wave Reached
+  # %max_wave%    : Maximum wave defined in settings
+  # %top1_player% : MVP Name (%top2_player%, %top3_player% also available)
+  # %top1_kills%  : MVP Kills
+  # %top1_class%  : MVP Class Name
+  announcer:
+    announce-when-arena-ends: true
+    messages:
+      victory:
+        - "&e=========================================="
+        - "&a&lVICTORY! &fArena &e%arena% &fhas been cleared!"
+        - "&7Reached Wave: &b%wave%&7/&b%max_wave%"
+        - ""
+        - "&e&lTOP MVPs:"
+        - " &61. &f%top1_player% &7- &c%top1_kills% Kills &8(%top1_class%)"
+        - " &62. &f%top2_player% &7- &c%top2_kills% Kills &8(%top2_class%)"
+        - " &63. &f%top3_player% &7- &c%top3_kills% Kills &8(%top3_class%)"
+        - "&e=========================================="
+      defeat:
+        - "&e=========================================="
+        - "&c&lMATCH OVER! &fArena &e%arena%"
+        - "&7Reached Wave: &b%wave%"
+        - ""
+        - "&e&lTOP MVPs:"
+        - " &61. &f%top1_player% &7- &c%top1_kills% Kills &8(%top1_class%)"
+        - " &62. &f%top2_player% &7- &c%top2_kills% Kills &8(%top2_class%)"
+        - " &63. &f%top3_player% &7- &c%top3_kills% Kills &8(%top3_class%)"
+        - "&e=========================================="
+
+  # ----------------------------------------
+  # HARDCORE MECHANICS: ORBITAL STRIKE
+  # ----------------------------------------
+  # Randomly targets players with a deadly lightning strike during combat.
+  hardcore-mechanics:
+    lightning-strike:
+      enabled: true
+      interval: 15 # Triggers every 15 seconds
+      strikes-per-wave:
+        min: 1
+        max: 3 # Spawns 1 to 3 strikes per interval
+      damage:
+        min: 5.0
+        max: 15.0 # True damage dealt
+        radius: 4.0 # AoE explosion radius
+      phases: # Phases in seconds (1.0 = 20 ticks)
+        silent-aim: 1.0 # Invisible tracking phase
+        tracking-min: 1.0 # Minimum red warning circle duration
+        tracking-max: 2.0 # Maximum red warning circle duration
+        lock-on: 0.5 # Green circle lock-on time (dash away now!)
+
+# ==========================================
+# AREA 2: MAP COORDINATES
+# ==========================================
+# It is highly recommended NOT to edit this manually.
+# Please use the in-game setup commands (e.g. /ma setup <arena>).
+coords:
+  p1: 0.0,0.0,0.0,0.0,0.0,world
+  p2: 0.0,0.0,0.0,0.0,0.0,world
+  lobby: 0.0,0.0,0.0,0.0,0.0,world
+  arena: 0.0,0.0,0.0,0.0,0.0,world
+  spectator: 0.0,0.0,0.0,0.0,0.0,world
+  spawnpoints:
+    s1: 0.0,0.0,0.0,0.0,0.0,world
+  # [MỚI] Lưu trữ tọa độ xuất hiện hòm thính
+  supplypoints:
+    s1: 0.0,0.0,0.0,0.0,0.0,world
+
+# ==========================================
+# AREA 3: REWARDS SYSTEM
+# ==========================================
+# Syntax for keys:
+# - 'X'              : Exact wave number (e.g., '10')
+# - 'every X normal' : Recurring reward during normal waves (e.g., 'every 5 normal')
+# - 'every X endless': Recurring reward during endless mode
+#
+# Supported reward types:
+# - vault:<amount>   : Gives money (Requires Vault)
+# - cmd(<command>)   : Executes a console command (%player% placeholder)
+rewards:
+  'every 5 normal':
+    - "vault:150.0"
+  '10':
+    - "vault:300.0"
+    - "cmd(give %player% diamond 1)"
+  'every 5 endless':
+    - "after-game: true" # Marks this reward exclusively for Endless Mode
+    - "vault:500.0"
+    - "cmd(give %player% netherite_ingot 1)"
+
+# ==========================================
+# AREA 4: SMART WAVES CONFIGURATION
+# ==========================================
+# -- WAVES SYNTAX GUIDE --
+# 'wave_name': (Must be a unique name, cannot be duplicated)
+#   waves: The condition to spawn this wave.
+#      - Range     : '1-5' (Spawns from wave 1 to 5)
+#      - List      : '3, 7' (Spawns on wave 3 and 7)
+#      - Endless   : '21+' (Spawns from wave 21 until infinity)
+#
+#   priority: Resolves conflicts when multiple waves match.
+#      - Priority 1: Highest (Always overrides others. Use for Bosses/Supplies).
+#      - Priority 5: Lowest (Default).
+#      - If priorities are equal, the system selects one randomly.
+#
+#   wave_types:
+#      - mob    : Standard mob spawning.
+#      - swarm  : Applies 'mob-multiplier' to spawn massive hordes.
+#      - boss   : Summons Custom Bosses from bosses.yml.
+#      - supply : Spawns a Supply Chest (Uses 'supply-id' and 'duration').
+#
+#   Modifiers (Optional):
+#      - maxhp-bonus    : '+10' (Adds 10 HP) or 'x2.0' (Doubles base HP).
+#      - damage-bonus   : '+2' or 'x1.5'.
+#      - general-effect : 'speed:1, resistance:2' (Applies potion effects).
+# ==========================================
+
+waves:
+  # ----------------------------------------
+  # TIER 1: EARLY GAME (Waves 1-9)
+  # ----------------------------------------
+  'basic_zombies':
+    waves: 1-9
+    priority: 3
+    wave_types: mob
+    maxhp-bonus: "+5"
+    mobs:
+      zombie:
+        amount: 3
+        equip:
+          - "iron_sword:1 sharpness:1 %100"
+      skeleton: 2
+
+  'spider_swarm_event':
+    waves: 3, 7
+    priority: 2
+    wave_types: swarm
+    mob-multiplier: 2.0
+    general-effect: "speed:1"
+    mobs:
+      cave_spider: 5
+      creeper:
+        amount: 2
+        explosion-damage: "x2.0"
+
+  # ----------------------------------------
+  # SPECIAL EVENTS (Priority 1 - Absolute)
+  # ----------------------------------------
+  'supply_drop_1':
+    waves: 5
+    priority: 1
+    wave_types: supply
+    supply-id: "supply1"
+    duration: 30.0
+
+  'boss_abyssal_warlord':
+    waves: 10
+    priority: 1
+    wave_types: boss
+    mobs:
+      abyssal_warlord: 1
+
+  # ----------------------------------------
+  # TIER 2: MID GAME (Waves 11-20)
+  # ----------------------------------------
+  'veteran_mobs':
+    waves: 11-20
+    priority: 3
+    wave_types: mob
+    maxhp-bonus: "x1.5"
+    damage-bonus: "+2.0"
+    general-effect: "resistance:1"
+    mobs:
+      husk: 6
+      stray: 4
+      creeper: 2
+
+  # ----------------------------------------
+  # ENDLESS MODE (Waves 21 and Beyond)
+  # ----------------------------------------
+  'endless_elite_pool':
+    waves: 21+
+    priority: 3
+    after-game: true
+    wave_types: mob
+    maxhp-bonus: "x3.0"
+    damage-bonus: "x2.0"
+    general-effect: "speed:1, strength:1"
+    mobs:
+      wither_skeleton:
+        amount: 8
+        equip:
+          - "diamond_sword:1 sharpness:5 %100"
+
+  'endless_boss_rush':
+    waves: 25, 30, 35, 40, 45, 50
+    priority: 1
+    after-game: true
+    wave_types: boss
+    mobs:
+      abyssal_warlord: 2

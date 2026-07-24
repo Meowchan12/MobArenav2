@@ -1,0 +1,186 @@
+# ==========================================
+# Basic Skill
+# ==========================================
+earthquake:
+  display-name: "Earthquake Slam"
+  type: AREA_DAMAGE
+  message: "&c&l[EARTHQUAKE] &4%boss% &eslams the ground with &c%skill%&e!"
+  radius: 6.0
+  damage: 8.0
+
+gravity_pull:
+  display-name: "Gravity Void"
+  type: PULL
+  message: "&5&l[VOID] &d%boss% &eis pulling everyone close with &5%skill%&e!"
+  radius: 12.0
+  strength: 1.5
+
+lightning_strike:
+  display-name: "Wrath of the Heavens"
+  type: LIGHTNING
+  message: "&e&l[THUNDER] &6%boss% &ecalls upon the &e%skill%&e!"
+  targets: 3
+  damage: 10.0
+
+absolute_defense:
+  display-name: "God Mode"
+  type: INVULNERABLE
+  message: "&b&l[SHIELD] &3%boss% &eenters &b%skill%&e! Attacks are useless!"
+  cooldown: 20
+  duration: 5
+
+# ==========================================
+# Extended Skill
+# ==========================================
+super_arrow:
+  display-name: "Super Arrow"
+  type: SUPER_ARROW_DAMAGE
+  message: "&c&l[BOW] &4%boss% &echarges a deadly &c%skill%&e!"
+  damage: 8.0
+  true-damage-amount: 4.0
+  cooldown: 15
+  active-time: 5
+
+ultimate_arrow:
+  display-name: "Ultimate Rain"
+  type: ULTIMATE_ARROW_DAMAGE
+  message: "&4&l[WARNING] &c%boss% &eunleashes a devastating &4%skill%&e!"
+  targets: "all"
+  damage: 10.0
+  true-damage-amount: 6.0
+  effects:
+    - "slowness:100:2"
+    - "blindness:60:1"
+  cooldown: 30
+
+knockbacker:
+  display-name: "Repel Wave"
+  type: KNOCKBACKER
+  message: "&6&l[KNOCKBACK] &e%boss% &ereleases a heavy &6%skill%&e!"
+  radius: 6.0
+  damage: 5.0
+  knockback-power: 2.0
+  knockback-height: 1.2
+  effects:
+    - "confusion:100:1"
+  cooldown: 20
+
+death_mark:
+  display-name: "Mark of Death"
+  type: DEATH_MARK
+  message: "&4&l[DEATH] &c%boss% &eplaced a terrifying &4%skill%&e on a player!"
+  chance: 50.0
+  duration: 10
+  cooldown: 30
+
+boss_freeze:
+  display-name: "FREEZE"
+  type: FREEZE
+  message: "&b&l[FROST] &3%boss% &efreezes the arena with &b%skill%&e!"
+  freeze-time: 3
+  hp-loss-percent: 35.0
+  after-effects:
+    - "slowness:300:1"
+  cooldown: 25
+
+# ==========================================
+# Advanced Action Skills (New Additions)
+# ==========================================
+magnetic_pull:
+  display-name: "Magnetic Pull"
+  type: MAGNETIC_PULL
+  message: "&d&l[MAGNETIC] &5%boss% &edraws all warriors near using &d%skill%&e!"
+  radius: 12.0
+  pull-strength: 1.5
+  effects:
+    - "blindness:40:1"
+  cooldown: 20
+
+earthquake_smash:
+  display-name: "Earthquake Smash"
+  type: EARTHQUAKE_SMASH
+  message: "&c&l[SMASH] &4%boss% &eleaps high and casts &c%skill%&e!"
+  radius: 8.0
+  jump-velocity: 1.5
+  knockup-power: 1.2
+  damage: 10.0
+  cooldown: 25
+
+toxic_nova:
+  display-name: "Toxic Nova"
+  type: TOXIC_NOVA
+  message: "&a&l[POISON] &2%boss% &ereleases a deadly &a%skill%&e ring!"
+  max-radius: 10.0
+  expansion-speed: 0.5
+  damage-per-tick: 2.0
+  effects:
+    - "wither:100:1"
+    - "slowness:100:2"
+  cooldown: 30
+
+minion_call:
+  display-name: "Rise of Minions"
+  type: MINION_CALL
+  message: "&8&l[SUMMON] &0%boss% &ecalls forth reinforcements with &c%skill%&e!"
+  mob-type: "VINDICATOR"
+  amount: 4
+  lifespan: 15
+  minion-buffs:
+    - "speed:300:2"
+  cooldown: 40
+
+dash_and_ranged:
+  display-name: "Sniper Dash"
+  type: DASH_AND_RANGED
+  message: "&b&l[AGILITY] &3%boss% &edashes into position with &b%skill%&e!"
+  dash:
+    power: 2.5
+    invulnerable-duration: 3
+  ranged-stance:
+    duration: 10
+    max-target-distance: 20.0
+    attack-interval: 1.0
+  cooldown: 45
+
+invis_teleporter:
+  display-name: "Phantom Assassin"
+  type: INVIS_TELEPORTER
+  message: "&8&l[SHADOW] &7%boss% &evanishes into the dark using &8%skill%&e!"
+  duration: 12
+  teleport-interval: 3
+  teleport-distance:
+    min: 4.0
+    max: 8.0
+  cooldown: 35
+
+spammer_bow:
+  display-name: "Arrow Rain"
+  type: SPAMMER_BOW
+  message: "&c&l[BARRAGE] &4%boss% &efires a relentless &c%skill%&e!"
+  duration: 6
+  attack-interval: 1.5
+  guaranteed-hit: true
+  knockback-force: 1.2
+  debuff:
+    chance: 15.0
+    effects:
+      - "poison:80:1"
+  cooldown: 30
+
+saitama_punch:
+  display-name: "Saitama Punch"
+  type: SAITAMA_PUNCH
+  message: "&4&l[FATAL STRIKE] &c%boss% &ereadies a devastating &4%skill%&e!"
+  duration: 5
+  true-damage: 5.0
+  cooldown: 25
+
+lifesteal_aura:
+  display-name: "Vampiric Touch"
+  type: LIFESTEAL_AURA
+  message: "&4&l[VAMPIRIC] &c%boss% &eactivates &4%skill%&e to drain your health!"
+  duration: 10
+  heal-percent:
+    min: 1.0
+    max: 1.5
+  cooldown: 30

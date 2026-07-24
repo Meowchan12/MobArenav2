@@ -1,0 +1,326 @@
+# ==========================================================
+# MOB ARENA V2 - ROGUELIKE UPGRADE SYSTEM
+# ----------------------------------------------------------
+# Placeholder Guide:
+# %current_level% : Player's current level
+# %max_level%     : Maximum level
+# %current_value% : Current value (base + increment * level)
+# %next_value%    : Value at the next level
+# ==========================================================
+
+settings:
+  enabled: true
+  trigger-every: 5
+  default-max-slots: 3
+  class-slots:
+    Knight: 3
+    Archer: 3
+    Alchemist: 4
+    Juggernaut: 2
+
+upgrades:
+  # ==========================================================
+  # CATEGORY 1: NORMAL UPGRADES (TOP SECTION: SLOTS 0 - 26)
+  # ==========================================================
+
+  # --- Nhóm Tấn Công (Góc Trái - Hàng 1) ---
+  warrior_might:
+    display-name: '&#FF5555&lWarrior''s Might &8[Lv.%current_level%/%max_level%]'
+    material: IRON_SWORD
+    weight: 50
+    slot: 1
+    type: DAMAGE_MULTIPLIER
+    max-level: 5
+    base-value: 1.1
+    increment: 0.05
+    lore:
+      - '&7&m---------------------'
+      - '&fInfuse your attacks with raw force.'
+      - '&fIncreases all outgoing physical damage.'
+      - '&fCurrent Bonus: &c+&e%current_value%%'
+      - '&fNext Level: &c+&e%next_value%%'
+      - '&f&o(Resets when match ends)'
+      - '&7&m---------------------'
+
+  critical_strike:
+    display-name: '&#FFAA00&lCritical Strike &8[Lv.%current_level%/%max_level%]'
+    material: GOLDEN_SWORD
+    weight: 35
+    slot: 2
+    type: CRITICAL_CHANCE
+    max-level: 5
+    base-value: 10.0
+    increment: 5.0
+    lore:
+      - '&7&m---------------------'
+      - '&fHone your precision to strike deadly blows.'
+      - '&fGrants a chance to deal &c&lDOUBLE&f damage!'
+      - '&fCurrent Chance: &c%current_value%%'
+      - '&fNext Level: &c%next_value%%'
+      - '&7&m---------------------'
+
+  adrenaline_rush:
+    display-name: '&#FFFF55&lAdrenaline Rush &8[Lv.%current_level%/%max_level%]'
+    material: SUGAR
+    weight: 45
+    slot: 3
+    type: HASTE_EFFECT
+    max-level: 2
+    base-value: 1.0
+    increment: 1.0
+    lore:
+      - '&7&m---------------------'
+      - '&fPumps adrenaline into your veins.'
+      - '&fIncreases your attack and weapon swing speed.'
+      - '&fCurrent Haste Tier: &eLv.%current_value%'
+      - '&fNext Tier: &eLv.%next_value%'
+      - '&7&m---------------------'
+
+  # --- Nhóm Phòng Thủ (Góc Phải - Hàng 1) ---
+  titan_heart:
+    display-name: '&#5555FF&lTitan Heart &8[Lv.%current_level%/%max_level%]'
+    material: RED_CONCRETE
+    weight: 25
+    slot: 5
+    type: MAX_HEALTH
+    max-level: 5
+    base-value: 2.0
+    increment: 2.0
+    lore:
+      - '&7&m---------------------'
+      - '&fFortify your vitality with ancient titan blood.'
+      - '&fPermanently increases your Maximum HP.'
+      - '&fCurrent HP Bonus: &c+&e%current_value% HP'
+      - '&fNext Level: &c+&e%next_value% HP'
+      - '&7&m---------------------'
+
+  iron_skin:
+    display-name: '&#AAAAAA&lIron Skin &8[Lv.%current_level%/%max_level%]'
+    material: IRON_CHESTPLATE
+    weight: 40
+    slot: 6
+    type: DAMAGE_REDUCTION
+    max-level: 4
+    base-value: 5.0
+    increment: 5.0
+    lore:
+      - '&7&m---------------------'
+      - '&fHardens your body against enemy strikes.'
+      - '&fReduces incoming physical damage taken.'
+      - '&fDamage Reduced: &b%current_value%%'
+      - '&fNext Level: &b%next_value%%'
+      - '&7&m---------------------'
+
+  phantom_barrier:
+    display-name: '&#00AAAA&lPhantom Barrier &8[Lv.%current_level%/%max_level%]'
+    material: SHIELD
+    weight: 40
+    slot: 7
+    type: WAVE_SHIELD
+    max-level: 4
+    base-value: 4.0
+    increment: 2.0
+    lore:
+      - '&7&m---------------------'
+      - '&fSummons a spectral barrier around you.'
+      - '&fGrants extra Absorption HP at wave start.'
+      - '&fCurrent Shield: &e%current_value% HP'
+      - '&fNext Level: &e%next_value% HP'
+      - '&7&m---------------------'
+
+  # --- Nhóm Hồi Phục & Tốc Độ (Góc Trái - Hàng 2) ---
+  vampiric_strike:
+    display-name: '&#FF0000&lVampiric Strike &8[Lv.%current_level%/%max_level%]'
+    material: RED_DYE
+    weight: 30
+    slot: 10
+    type: LIFESTEAL
+    max-level: 3
+    base-value: 5.0
+    increment: 3.5
+    lore:
+      - '&7&m---------------------'
+      - '&fCurse your blade with vampiric thirst.'
+      - '&fGrants a chance to siphon health on hit.'
+      - '&fCurrent Chance: &c%current_value%%'
+      - '&fNext Level: &c%next_value%%'
+      - '&7&m---------------------'
+
+  soul_harvester:
+    display-name: '&#AA00AA&lSoul Harvester &8[Lv.%current_level%/%max_level%]'
+    material: WITHER_ROSE
+    weight: 35
+    slot: 11
+    type: HEAL_ON_KILL
+    max-level: 5
+    base-value: 1.0
+    increment: 1.0
+    lore:
+      - '&7&m---------------------'
+      - '&fAbsorb the essence of fallen foes.'
+      - '&fRestores HP whenever you slay a monster.'
+      - '&fCurrent Heal: &a+%current_value% HP'
+      - '&fNext Level: &a+%next_value% HP'
+      - '&7&m---------------------'
+
+  swift_wind:
+    display-name: '&#55FFFF&lSwift Wind &8[Lv.%current_level%/%max_level%]'
+    material: FEATHER
+    weight: 45
+    slot: 12
+    type: SPEED_BOOST
+    max-level: 3
+    base-value: 10.0
+    increment: 5.0
+    lore:
+      - '&7&m---------------------'
+      - '&fBlesses your steps with the gale of wind.'
+      - '&fIncreases your overall movement speed.'
+      - '&fSpeed Bonus: &b+%current_value%%'
+      - '&fNext Level: &b+%next_value%%'
+      - '&7&m---------------------'
+
+  # --- Nhóm Rủi Ro & Tiện Ích (Góc Phải - Hàng 2) ---
+  midas_touch:
+    display-name: '&#FFAA00&lMidas Touch &8[Lv.%current_level%/%max_level%]'
+    material: GOLD_INGOT
+    weight: 30
+    slot: 14
+    type: ECO_MULTIPLIER
+    max-level: 4
+    base-value: 25.0
+    increment: 25.0
+    lore:
+      - '&7&m---------------------'
+      - '&fTurn enemy blood into pure gold.'
+      - '&fIncreases all Vault money rewards earned!'
+      - '&fCurrent Bonus: &6+%current_value%%'
+      - '&fNext Level: &6+%next_value%%'
+      - '&7&m---------------------'
+
+  berserkers_pact:
+    display-name: '&#444444&lBerserker''s Pact &8[Lv.%current_level%/%max_level%]'
+    material: WITHER_SKELETON_SKULL
+    weight: 25
+    slot: 15
+    type: GLASS_CANNON
+    max-level: 3
+    base-value: 20.0
+    increment: 15.0
+    lore:
+      - '&7&m---------------------'
+      - '&fSacrifice safety for catastrophic power.'
+      - '&fDeal massively increased damage, but take'
+      - '&c+15% &fmore damage from all sources!'
+      - '&fCurrent DMG Boost: &c+%current_value%%'
+      - '&fNext Level: &c+%next_value%%'
+      - '&7&m---------------------'
+
+  gamblers_dice:
+    display-name: '&#FFAA00&lGambler''s Dice &8[Consumable]'
+    material: KELP
+    weight: 20
+    slot: 16
+    type: RANDOM_EVENT
+    max-level: 1
+    lore:
+      - '&7&m---------------------'
+      - '&fRoll the dice and challenge fate!'
+      - '&a50% Chance: &aReceive +$2000'
+      - '&c50% Chance: &cTake 5 True Damage'
+      - '&7&m---------------------'
+    events:
+      good_luck:
+        chance: 50.0
+        command: eco give %player% 2000
+        message: '&aJACKPOT! You received $2000!'
+      bad_luck:
+        chance: 50.0
+        true-damage: 5.0
+        message: '&cOuch... The dice was cursed.'
+
+  # --- Cứu Trợ Khẩn Cấp (Căn Giữa - Hàng 3) ---
+  instant_heal:
+    display-name: '&#55FF55&lInstant Heal &8[Consumable]'
+    material: GOLDEN_APPLE
+    weight: 15
+    slot: 22
+    type: HEAL
+    max-level: 1
+    value: 20.0
+    lore:
+      - '&7&m---------------------'
+      - '&fInstantly restores your health bar.'
+      - '&fA vital lifesaver during boss encounters!'
+      - '&7&m---------------------'
+
+  # ==========================================================
+  # CATEGORY 2: SUPER UPGRADES (BOTTOM SECTION: SLOTS 36 - 52)
+  # ==========================================================
+  # (These are centered symmetrically on Row 5)
+
+  super_executioner:
+    display-name: '&#FF0000&l★ SUPER: Executioner''s Scythe ★'
+    material: NETHERITE_HOE
+    weight: 3
+    slot: 38
+    type: SUPER_EXECUTE
+    max-level: 1
+    execute-threshold: 15.0
+    explosion-damage: 10.0
+    lore:
+      - '&7&m---------------------'
+      - '&e&lLEGENDARY SUPER ITEM!'
+      - '&fInstantly executes non-boss monsters'
+      - '&fwhen their health drops below &c15%&f.'
+      - '&fExecuted foes explode, dealing AoE damage!'
+      - '&7&m---------------------'
+
+  super_aegis:
+    display-name: '&#FFAA00&l★ SUPER: Aegis of Immortality ★'
+    material: NETHER_STAR
+    weight: 2
+    slot: 39
+    type: SUPER_REVIVE
+    max-level: 1
+    lore:
+      - '&7&m---------------------'
+      - '&e&lLEGENDARY SUPER ITEM!'
+      - '&fPrevents fatal damage &aONCE&f per match.'
+      - '&fUpon triggering: Grants &bInvulnerability&f for 5s'
+      - '&fand knocks back surrounding enemies!'
+      - '&7&m---------------------'
+
+  super_overclock:
+    display-name: '&#00FFFF&l★ SUPER: Overclocked Core ★'
+    material: BEACON
+    weight: 4
+    slot: 41
+    type: SUPER_OVERCLOCK
+    max-level: 1
+    attack-speed-boost: 100.0
+    lore:
+      - '&7&m---------------------'
+      - '&e&lLEGENDARY SUPER ITEM!'
+      - '&fRemoves all weapon attack cooldowns!'
+      - '&fUnleash an endless barrage of swings'
+      - '&fwith maximum strike frequency!'
+      - '&7&m---------------------'
+
+  super_nova:
+    display-name: '&#FF55FF&l★ SUPER: Supernova Orb ★'
+    material: MAGMA_CREAM
+    weight: 3
+    slot: 42
+    type: SUPER_AUTO_STRIKE
+    max-level: 1
+    interval: 10
+    damage: 35.0
+    radius: 6.0
+    lore:
+      - '&7&m---------------------'
+      - '&e&lLEGENDARY SUPER ITEM!'
+      - '&fAutomatically triggers a orbital strike'
+      - '&fat the densest group of mobs every &e10s&f!'
+      - '&fDeals massive &c35.0 AoE Damage&f.'
+      - '&7&m---------------------'

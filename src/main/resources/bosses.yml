@@ -1,0 +1,73 @@
+# ==========================================
+# MELEE & TANK BOSSES
+# ==========================================
+abyssal_warlord:
+  type: ZOMBIE
+  Boss_displayname: "&4&lAbyssal Warlord"
+  Bossbar: true
+  nametagshow: true
+  HP: 500.0
+  Damage: 15.0
+  effect-bonus: "speed:1, resistance:1"
+  Equip:
+    - "diamond_sword:1 sharpness:4 %100" # ItemParser-compatible syntax
+  skill:
+    - "earthquake"
+    - "knockbacker" # Knocks back nearby players if they group up too closely
+
+iron_behemoth:
+  type: IRON_GOLEM
+  Boss_displayname: "&#FFAA00&lThe Iron Behemoth"
+  Bossbar: true
+  nametagshow: true
+  HP: 1500.0
+  Damage: 30.0
+  spawn-message: "&#FF5555&l⚠ The ground shakes... The Iron Behemoth has awakened! ⚠"
+  spawn-sound: "ENTITY_ENDER_DRAGON_GROWL"
+  loot-supply: "boss_loot_forge"
+  # Equip section removed because Iron Golems cannot wield weapons
+  skill:
+    - "earthquake"
+    - "absolute_defense" # Activates an invulnerability shield to corner players
+  enrage-skill:
+    - "lightning_strike"
+
+# ==========================================
+# RANGED & HIGH-MOBILITY BOSSES
+# ==========================================
+eclipse_huntsman:
+  type: SKELETON
+  Boss_displayname: "&#00FFFF&lEclipse Huntsman"
+  Bossbar: true
+  nametagshow: true
+  HP: 400.0
+  Damage: 10.0
+  spawn-message: "&#00FFFF&l⚠ An arrow from the shadows... The Eclipse Huntsman has locked on! ⚠"
+  spawn-sound: "ENTITY_SKELETON_HORSE_DEATH"
+  effect-bonus: "speed:2, jump_boost:2"
+  Equip:
+    - "bow:1 power:5;punch:2 %100"
+    - "chainmail_helmet:1 %100"
+  skill:
+    - "super_arrow"
+    - "ultimate_arrow"
+    - "gravity_pull" # Devastating combo: Pulls all players together before unleashing the Ultimate Arrow!
+
+# ==========================================
+# DEATH MAGE / ASSASSIN BOSSES
+# ==========================================
+soul_reaper:
+  type: WITHER_SKELETON
+  Boss_displayname: "&#5555FF&lSoul Reaper"
+  Bossbar: true
+  nametagshow: true
+  HP: 800.0
+  Damage: 20.0
+  spawn-message: "&#5555FF&l❄ Feel the chill of death... The Soul Reaper has arrived! ❄"
+  spawn-sound: "ENTITY_WITHER_SPAWN"
+  loot-supply: "boss_loot_lich"
+  Equip:
+    - "netherite_sword:1 smite:5;knockback:2 %100"
+  skill:
+    - "boss_freeze" # Freezes players and removes 35% of their maximum health
+    - "death_mark"  # Applies a cursed mark that destroys Totems of Undying

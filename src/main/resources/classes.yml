@@ -1,0 +1,42 @@
+# ==========================================
+# COMBAT CLASSES CONFIGURATION
+# ==========================================
+# Syntax Guide (Synced with ItemParser):
+# - Basic Items: "material:amount enchant_name:level;enchant_name:level"
+# - Potion: "splash_potion:amount effect_name:level"
+# - Status Effects: "effect_name:amplifier" (Level 0 = Tier 1 in-game)
+# - Limit: The maximum number of players who can choose this class per arena (Omit or set to -1 for infinite)
+# - allowed-arenas: List of arenas where this class can be used. (Omit to allow everywhere)
+# ==========================================
+
+classes:
+  Knight:
+    limit: -1 # Unlimited slots
+    items: "netherite_sword:1 sharpness:5;unbreaking:3;fire_aspect:2;mending:1, golden_apple:16, cooked_beef:64"
+    armor: "netherite_helmet:1 protection:4, netherite_chestplate:1 protection:4;thorns:3, netherite_leggings:1 protection:4, netherite_boots:1 protection:4;feather_falling:4"
+    effects: "health_boost:4, resistance:0"
+
+  Archer:
+    limit: -1 # Unlimited slots
+    items: "bow:1 power:5;infinity:1;punch:2, arrow:1, wooden_sword:1 knockback:2, golden_apple:8, cooked_beef:64"
+    armor: "chainmail_helmet:1 protection:3, chainmail_chestplate:1 protection:3, chainmail_leggings:1 protection:3, chainmail_boots:1 protection:3;speed:2"
+    effects: "speed:1, jump_boost:1"
+
+  Alchemist:
+    limit: 2 # Limited to 2 support players per arena
+    items: "golden_sword:1 smite:5;looting:3, splash_potion:32 instant_damage:2, splash_potion:16 instant_heal:2, golden_apple:32"
+    armor: "golden_helmet:1 protection:4, golden_chestplate:1 protection:4, golden_leggings:1 protection:4, golden_boots:1 protection:4"
+    effects: "regeneration:0, speed:0"
+
+  # ==========================================
+  # THE HEAVY TANK: JUGGERNAUT (1 SLOT ONLY)
+  # ==========================================
+  Juggernaut:
+    limit: 1 # Only 1 player can select this ultimate tank class
+    allowed-arenas: # [MỚI] Chỉ cho phép class này xuất hiện ở các map có tên dưới đây
+      - "stage2"
+      - "stage3"
+      - "boss_room"
+    items: "netherite_axe:1 sharpness:6;smite:3;unbreaking:5, shield:1 unbreaking:5, enchanted_golden_apple:3, cooked_beef:64"
+    armor: "netherite_helmet:1 protection:5, netherite_chestplate:1 protection:5;projectile_protection:4, netherite_leggings:1 protection:5, netherite_boots:1 protection:5;blast_protection:4"
+    effects: "slowness:1, resistance:2, health_boost:9" # Extremely slow, heavily armored (+20 hearts)

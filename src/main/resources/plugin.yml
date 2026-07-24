@@ -1,0 +1,17 @@
+name: MobArenav2
+# Maven sẽ tự động thay placeholder này thành 3.0 khi build (nhờ filtering=true)
+version: '${project.version}'
+main: vn.meowchan12.mobarenav2.MobArenav2
+api-version: '1.21'
+prefix: MobArenav2
+authors: [Meowchan12]
+
+# Giữ nguyên depend và softdepend như bạn yêu cầu
+depend: [Vault]
+softdepend: [PlaceholderAPI, MythicMobs]
+
+commands:
+  ma:
+    description: Core command for MobArenav2
+    usage: /ma <join|leave|setup|...>
+    aliases: [mobarena]

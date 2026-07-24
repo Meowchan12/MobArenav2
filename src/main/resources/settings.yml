@@ -1,0 +1,101 @@
+# ==========================================
+# GENERAL SETTINGS
+# ==========================================
+prefix: "&#FF5555[&lMobArena V2&r&#FF5555] &r" # Modern Hex Color
+
+# ==========================================
+# SCOREBOARD CONFIGURATION (Right-side Scoreboard)
+# Placeholders available:
+# %arena%       - Arena Name
+# %wave%        - Current Wave
+# %next_wave%   - Next Wave Number
+# %mobs%        - Remaining Mobs
+# %players%     - Alive Players Count
+# %dead%        - Dead/Spectator Count
+# %kills%       - Player's Personal Kills
+# %next_boss%   - Wave number of Next Boss (or "None")
+# %next_supply% - Wave number of Next Supply Drop (or "None")
+# ==========================================
+scoreboard:
+  enabled: true
+  title: "&#FF5555&lᴍᴏʙᴀʀᴇɴᴀ"
+  lines:
+    - "&7&m-------------------"
+    - "&fᴀʀᴇɴᴀ: &e%arena%"
+    - "&fsᴛᴀᴛᴜs: &a%players% Alive &7| &c%dead% Dead"
+    - "&fᴘʟᴀʏᴇʀs:"
+    - "+++"
+    - " &b%index%. %player% &f- Kills: &e%kills% &7(%status%&7)"
+    - "+++"
+    - ""
+    - "&fᴍᴏʙ ʀᴇᴍᴀɪɴɪɴɢ: &c%mobs%"
+    - "&fɴᴇxᴛ ᴡᴀᴠᴇ: &e%next_wave%"
+    - "&fɴᴇxᴛ sᴜᴘᴘʟʏ ᴡᴀᴠᴇ: &b%next_supply%"
+    - "&cɴᴇxᴛ ʙᴏss ᴡᴀᴠᴇ: &4%next_boss%"
+    - "&7&m-------------------"
+
+# ==========================================
+# GUI CONFIGURATION
+# ==========================================
+gui:
+  # Endless Mode Voting Menu
+  vote:
+    title: "Enter Endless Mode?"
+    yes-item:
+      material: EMERALD_BLOCK
+      name: "&a&lCONTINUE (YES)"
+      lore:
+        - "&7Vote to enter Endless Mode."
+        - "&7Double difficulty, massive rewards!"
+    no-item:
+      material: REDSTONE_BLOCK
+      name: "&c&lSTOP (NO)"
+      lore:
+        - "&7Vote to end the match."
+        - "&7Claim your rewards and return to Lobby."
+
+  # Upgrade Selection Menu (Used if the Upgrade system is enabled)
+  upgrade:
+    title: "Choose Upgrade (Wave %wave%)"
+
+# ==========================================
+# SYSTEM MESSAGES
+# ==========================================
+messages:
+  # Basic Errors
+  no-permission: "%prefix%&cYou do not have permission to use this command!"
+  arena-not-found: "%prefix%&cArena not found!"
+  player-only: "&cOnly players can use this command!"
+
+  # Join / Leave
+  arena-full: "&cThis arena is currently full!"
+  arena-running: "&cThis arena is already running!"
+  already-in-arena: "&cYou are already in an arena!"
+  join-success: "&aSuccessfully joined Arena &e%arena%&a! Waiting for admin to start..."
+  leave-success: "&eYou have safely left the arena."
+
+  # Match & Boss Announcements
+  arena-start:
+    chat: "%prefix%&c&lThe battle has begun! Prepare yourself!"
+    title: "&c&lBATTLE START"
+    subtitle: "&eDefend the arena!"
+  arena-end: "&a&lThe battle has ended! Thank you for playing."
+  wave-start:
+    actionbar: "&e⚔ Wave &b%wave% &ehas started! ⚔"
+  boss-spawn: "&4&l⚠ BOSS %boss_name% HAS APPEARED! ⚠"
+  supply-drop:
+    chat: "%prefix%&b&lA Supply Drop has landed at the center!"
+    sound: "BLOCK_BEACON_ACTIVATE"
+
+  # Endless Mode Voting
+  vote-start: "&bVoting for Endless Mode has started... You have 30 seconds!"
+  vote-yes: "&aThe majority voted to CONTINUE. Welcome to ENDLESS MODE!"
+  vote-no: "&cThe majority voted to STOP. The arena is now closing..."
+
+  # Setup System (Admin Only)
+  setup-mode-enter: "&aYou have entered Setup mode for Arena &e%arena%&a. Use the Blaze Rod to set positions (P1, P2)."
+  setup-mode-exit: "&eExited Setup mode."
+  set-p1: "&aSuccessfully set Point 1 (P1) at your location."
+  set-p2: "&aSuccessfully set Point 2 (P2) at your location."
+  set-spawn: "&aSuccessfully added a new Spawnpoint!"
+  set-lobby: "&aSuccessfully set the Lobby location."
